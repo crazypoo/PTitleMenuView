@@ -9,8 +9,8 @@
 import UIKit
 
 protocol PDropDownMenuDelegate {
-    func dropdownMenuDidDismiss(menu: PDropDownMenuView)
-    func dropdownMenuDidShow(menu:PDropDownMenuView)
+    func dropdownMenuDidDismiss(_ menu: PDropDownMenuView)
+    func dropdownMenuDidShow(_ menu:PDropDownMenuView)
 }
 
 class PDropDownMenuView: UIView
@@ -21,11 +21,11 @@ class PDropDownMenuView: UIView
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
 
         _containerView = UIImageView()
-        _containerView?.backgroundColor = UIColor.clearColor()
-        _containerView!.userInteractionEnabled = true
+        _containerView?.backgroundColor = UIColor.clear
+        _containerView!.isUserInteractionEnabled = true
         self.addSubview(_containerView!)
     }
     
@@ -33,24 +33,24 @@ class PDropDownMenuView: UIView
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setContentController(contentController:UIViewController) {
+    func setContentController(_ contentController:UIViewController) {
         _contentController = contentController
         let content:UIView = contentController.view
         content.frame.origin.x = 7
         content.frame.origin.y = 13
-        _containerView!.frame.size.height = CGRectGetMaxY(content.frame) + 9
-        _containerView!.frame.size.width = CGRectGetMaxX(content.frame) + 7;
+        _containerView!.frame.size.height = content.frame.maxY + 9
+        _containerView!.frame.size.width = content.frame.maxX + 7;
         _containerView!.addSubview(content)
     }
 
-    func showFrom(from:UIView)
+    func showFrom(_ from:UIView)
     {
-        let window:UIWindow = UIApplication.sharedApplication().windows.last!
+        let window:UIWindow = UIApplication.shared.windows.last!
         window.addSubview(self)
         self.frame = window.bounds
-        let newFrame:CGRect = from.convertRect(from.bounds, toView: window)
-        _containerView!.center.x = CGRectGetMidX(newFrame)
-        _containerView!.frame.origin.y = CGRectGetMaxY(newFrame)
+        let newFrame:CGRect = from.convert(from.bounds, to: window)
+        _containerView!.center.x = newFrame.midX
+        _containerView!.frame.origin.y = newFrame.maxY
         self.delegate!.dropdownMenuDidShow(self)
     }
 
@@ -60,7 +60,7 @@ class PDropDownMenuView: UIView
         self.delegate?.dropdownMenuDidDismiss(self)
     }
 
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         dismiss()
     }
 }

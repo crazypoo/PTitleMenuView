@@ -14,15 +14,15 @@ class ViewController: UIViewController,PDropDownMenuDelegate,PTitleMenuDelegate 
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
 
-        let btn:UIButton? = UIButton.init(type: .Custom)
-        btn?.frame = CGRectMake(5, 0, self.view.frame.size.width-10, 50)
-        btn?.backgroundColor = UIColor.redColor()
-        btn?.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        let btn:UIButton? = UIButton.init(type: .custom)
+        btn?.frame = CGRect(x: 5, y: 0, width: self.view.frame.size.width-10, height: 50)
+        btn?.backgroundColor = UIColor.red
+        btn?.setTitleColor(UIColor.white, for: UIControlState())
         btn?.titleLabel?.font = UIFont.init(name: "AppleSDGothicNeo-Regular", size: 18)
-        btn?.setTitle("添加大类", forState: .Normal)
-        btn?.addTarget(self, action: #selector(self.btnTouch(_:)), forControlEvents: .TouchUpInside)
+        btn?.setTitle("添加大类", for: UIControlState())
+        btn?.addTarget(self, action: #selector(self.btnTouch(_:)), for: .touchUpInside)
         self.navigationItem.titleView = btn
     }
 
@@ -31,7 +31,7 @@ class ViewController: UIViewController,PDropDownMenuDelegate,PTitleMenuDelegate 
         // Dispose of any resources that can be recreated.
     }
 
-    func btnTouch(sender:UIButton)
+    func btnTouch(_ sender:UIButton)
     {
         NSLog("lllll")
 
@@ -46,25 +46,25 @@ class ViewController: UIViewController,PDropDownMenuDelegate,PTitleMenuDelegate 
         model.titleID = "1111"
         model.titleStr = "2222222"
 
-        titleMenuVC?.data.addObject(model)
+        titleMenuVC?.data.add(model)
 //        dropdownMenuViews?._contentController = titleMenuVC!
         dropdownMenuViews?.setContentController(titleMenuVC!)
         dropdownMenuViews?.showFrom(sender)
     }
 
-    func dropdownMenuDidShow(menu: PDropDownMenuView) {
+    func dropdownMenuDidShow(_ menu: PDropDownMenuView) {
 
     }
 
-    func dropdownMenuDidDismiss(menu: PDropDownMenuView) {
+    func dropdownMenuDidDismiss(_ menu: PDropDownMenuView) {
 
     }
 
-    func selectAtIndexPath(indexPath: NSIndexPath, title: NSString) {
+    func selectAtIndexPath(_ indexPath: IndexPath, title: NSString) {
 
     }
 
-    func didDeleteCellActWithTitleName(indexPath: NSIndexPath) {
+    func didDeleteCellActWithTitleName(_ indexPath: IndexPath) {
 
     }
 
